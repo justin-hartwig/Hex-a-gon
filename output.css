@@ -29,6 +29,18 @@ p {
   color: #FFF;
 }
 
+h1 {
+  margin: 0 auto 1rem auto;
+}
+
+h2 {
+  margin: 0 auto 1rem auto;
+}
+
+p {
+  margin: 0 auto 2rem auto;
+}
+
 #random-hex-value {
   font-size: 1.2rem;
   font-weight: 700;
@@ -58,6 +70,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .color-choice {
@@ -75,7 +88,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  margin: 1rem 0;
+  margin: 0.25rem auto 1rem auto;
 }
 
 button {
@@ -101,5 +114,5 @@ button:disabled:hover, button:disabled:active, button:disabled:focus {
   color: #FFF;
 }
 button#play-again {
-  margin: 0 auto;
+  margin: 0 auto 1.5rem auto;
 }
