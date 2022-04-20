@@ -26,9 +26,11 @@ h5,
 h6,
 p {
   font-family: "Poppins", sans-serif;
+  color: #FFF;
 }
 
 body {
+  background-color: #201a40;
   margin: 0;
 }
 
