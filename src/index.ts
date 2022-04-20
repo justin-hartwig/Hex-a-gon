@@ -1,24 +1,21 @@
-//THIS IS THE ENTRY FILE - WRITE YOUR MAIN LOGIC HERE!
+import { correctAnswer, generateColorChoices } from "./colorCoice";
+import { currentDifficulty } from "./difficulty";
+import { renderDifficultyOptions, updateAnswers, updateQuestionNumber } from "./domManipulation";
+import { initalizePlayAgain } from "./replay";
 
-import { helloWorld, Beispiel } from "./myModule";
-import { alertMe } from "./myOtherModule";
 
-console.log(helloWorld);
-customElements.define("my-beispiel", Beispiel);
-
-alertMe();
-
-const myInputValue = document.querySelector<HTMLInputElement>("#myInput");
-
-const myInputValueAlternate = document.querySelector(
-  "#myInput"
-) as HTMLInputElement;
-
-document
-  .querySelector<HTMLInputElement>("#myInput")
-  ?.addEventListener("focus", doSmth);
-
-function doSmth(e: UIEvent) {
-  const val = e.target as HTMLInputElement;
-  console.log(e, val.value);
+function initalize() : void {
+    initalizePlayAgain();
+    renderDifficultyOptions();
+    play();
 }
+
+function play() : void {
+    generateColorChoices(currentDifficulty);
+    updateQuestionNumber(correctAnswer);
+    updateAnswers();
+}
+
+initalize();
+
+export { play };
