@@ -1,8 +1,10 @@
-import { colorChoice, correctAnswer, getColorChoiceByHTMLElement, removeChoice } from "./colorCoice";
+import { colorChoice, correctAnswer, getColorChoiceBySVGElement, removeChoice } from "./colorCoice";
 import { enablePlayAgain, updateAnswerMessage, updateAnswers } from "./domManipulation";
 
-function validateAnswer(target : HTMLElement) : void {
-    const choice : colorChoice = getColorChoiceByHTMLElement(target);
+function validateAnswer(target : SVGElement) : void {
+    const choice : colorChoice = getColorChoiceBySVGElement(target);
+    console.log(choice);
+    console.log("Hex" + choice.value + ", Richtiges ergbeniss" + correctAnswer);
     updateAnswerMessage(choice.value === correctAnswer);
     if(choice.value !== correctAnswer) {
         removeChoice(choice);
