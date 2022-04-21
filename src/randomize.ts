@@ -1,6 +1,9 @@
+//https://stackoverflow.com/questions/58325771/how-to-generate-random-hex-string-in-javascript IceMetalPunk
 function randomHexValue() :string{
-    const randomHexString = "#" + Math.floor(Math.random()*16777215).toString(16); //16777215 = #ffffff
-    console.log(randomHexString);
+    let randomHexString = '#';
+    for (let i = 0; i < 6; ++i) {
+        randomHexString += (Math.floor(Math.random() * 16)).toString(16);
+    }
     return randomHexString;
 }
 
