@@ -1,5 +1,5 @@
 import { colorChoice, correctAnswer, getColorChoiceBySVGElement, removeChoice } from "./colorCoice";
-import { toggleColorChoice, togglePlayAgain, updateAnswerMessage, updateAnswers } from "./domManipulation";
+import { disableColorChoice, enablePlayAgain, updateAnswerMessage, updateAnswers } from "./domManipulation";
 
 function validateAnswer(target : SVGElement) : void {
     const choice : colorChoice = getColorChoiceBySVGElement(target);
@@ -9,8 +9,8 @@ function validateAnswer(target : SVGElement) : void {
         updateAnswers();
     } 
     else {
-        togglePlayAgain();
-        toggleColorChoice();
+        enablePlayAgain();
+        disableColorChoice();
     }
 }
 

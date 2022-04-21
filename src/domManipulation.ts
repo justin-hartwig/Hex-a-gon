@@ -24,17 +24,20 @@ function renderDifficultyOptions() : void {
     difficultyOptions.forEach( option => difficultyOptionContainer.appendChild(option.domElement));
 }
 
-function togglePlayAgain() : void {
-    playAgainButton.disabled = !playAgainButton.disabled;
+function disablePlayAgain() : void {
+    playAgainButton.disabled = true;
 }
 
-function toggleColorChoice() : void {
-    if(colorChoiceContainer.classList.contains("disabled")) {
-        colorChoiceContainer.classList.remove("disabled");
-    }
-    else {
-        colorChoiceContainer.classList.add("disabled");
-    }
+function enablePlayAgain() : void {
+    playAgainButton.disabled = false;
 }
 
-export { updateQuestionNumber, updateAnswers, updateAnswerMessage, togglePlayAgain, renderDifficultyOptions, toggleColorChoice };
+function disableColorChoice() : void {
+    colorChoiceContainer.classList.add("disabled");
+}
+
+function enableColorChoice() : void {
+    colorChoiceContainer.classList.remove("disabled");
+}
+
+export { updateQuestionNumber, updateAnswers, updateAnswerMessage, renderDifficultyOptions, disableColorChoice, enableColorChoice, disablePlayAgain, enablePlayAgain };

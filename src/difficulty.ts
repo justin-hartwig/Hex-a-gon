@@ -31,17 +31,23 @@ function createDifficultyOptionDomElement (name : string, difficultyNumber : num
 
 function changeDifficulty(difficulty : number) : void {
     currentDifficulty = difficulty;
+    difficultyOptions.forEach(option => option.domElement.classList.remove("active"));
+    getDifficultyOptionByNumber(difficulty).domElement.classList.add("active");
     play();
 }
 
-function getDifficultyOptionByName(name : string) : difficultyOption {
+function getDifficultyOptionByNumber(value : number) : difficultyOption {
     let option : difficultyOption = {} as difficultyOption;
     for (let i : number = 0; i < difficultyOptions.length; i++) {
-        if (difficultyOptions[i].name === name){
+        if (difficultyOptions[i].value === value){
             option = difficultyOptions[i];
         }
     }
     return option;
 }
 
-export { currentDifficulty, difficultyOptions };
+function initalizeActiveDifficulty() : void {
+    getDifficultyOptionByNumber(currentDifficulty).domElement.classList.add("active");
+}
+
+export { currentDifficulty, difficultyOptions, initalizeActiveDifficulty };
