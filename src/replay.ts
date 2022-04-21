@@ -1,4 +1,3 @@
-import { currentDifficulty } from "./difficulty";
 import { playAgainButton } from "./domElements";
 import { play } from "./index";
 

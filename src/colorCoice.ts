@@ -6,7 +6,7 @@ interface colorChoice {
     domElement : SVGElement;
 }
 
-const correctAnswer : string = randomHexValue();
+let correctAnswer : string = randomHexValue();
 let answers :  colorChoice[] = [];
 
 function createColorChoice(hexValue : string) : colorChoice {
@@ -16,7 +16,9 @@ function createColorChoice(hexValue : string) : colorChoice {
     element.setAttribute("height", "105");
     element.setAttribute("viewBox", "0 0 121 105");
     element.setAttribute("fill", "none");
-    element.addEventListener("click", e => validateAnswer(e.target as SVGElement));
+    element.addEventListener("click", function(event : Event) {
+        colorChoiceOnClick(event);
+    }, false);
     element.innerHTML = `<path d="M90.92 0.960022L120.92 52.922L90.92 104.884H30.92L0.920044 52.922L30.92 0.960022H90.92Z" fill="${hexValue}"/>`;
 
     const choice : colorChoice = { value : hexValue, domElement: element};
@@ -46,4 +48,12 @@ function getColorChoiceBySVGElement (element : SVGElement) : colorChoice {
     return choice;
 }
 
-export { correctAnswer, answers, generateColorChoices, getColorChoiceBySVGElement, removeChoice, colorChoice };
+function regenerateCorrectAnswer() : void {
+    correctAnswer = randomHexValue();
+}
+
+function colorChoiceOnClick(event : Event) : void {
+    validateAnswer(event.target as SVGElement)
+}
+
+export { correctAnswer, answers, generateColorChoices, getColorChoiceBySVGElement, removeChoice, regenerateCorrectAnswer, colorChoice };

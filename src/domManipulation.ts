@@ -14,7 +14,6 @@ function updateAnswers() : void{
 function updateAnswerMessage (answerValidity : boolean) : void {
     if (answerValidity) {
         answerMessage.innerText = "Das ist die Richtige Antwort! Glückwunsch!"
-        enablePlayAgain();
     }
     else {
         answerMessage.innerText = "Das ist die Falsche Antwort! Versuche es nochmal!"
@@ -25,12 +24,17 @@ function renderDifficultyOptions() : void {
     difficultyOptions.forEach( option => difficultyOptionContainer.appendChild(option.domElement));
 }
 
-function enablePlayAgain() : void {
-    playAgainButton.disabled = false;
+function togglePlayAgain() : void {
+    playAgainButton.disabled = !playAgainButton.disabled;
 }
 
-function disablePlayAgain() : void {
-    playAgainButton.disabled = true;
+function toggleColorChoice() : void {
+    if(colorChoiceContainer.classList.contains("disabled")) {
+        colorChoiceContainer.classList.remove("disabled");
+    }
+    else {
+        colorChoiceContainer.classList.add("disabled");
+    }
 }
 
-export { updateQuestionNumber, updateAnswers, updateAnswerMessage, enablePlayAgain, renderDifficultyOptions };
+export { updateQuestionNumber, updateAnswers, updateAnswerMessage, togglePlayAgain, renderDifficultyOptions, toggleColorChoice };
