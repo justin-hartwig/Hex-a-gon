@@ -4,8 +4,11 @@
     cursor: pointer;
 
     path {
-        width: 100%;
-        height: 100%;
+        width: 95%;
+        height: 95%;
         pointer-events: none;
+        stroke: $font-color;
+        stroke-width: 4px;
+        stroke-linejoin: round;
     }
 }

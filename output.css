@@ -65,6 +65,13 @@ body {
   text-align: center;
 }
 
+.disabled,
+:disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
 #color-choice-container {
   display: flex;
   flex-wrap: wrap;
@@ -79,9 +86,12 @@ body {
   cursor: pointer;
 }
 .color-choice path {
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 95%;
   pointer-events: none;
+  stroke: #FFF;
+  stroke-width: 4px;
+  stroke-linejoin: round;
 }
 
 #difficulty-container {
@@ -105,10 +115,6 @@ button {
 button:hover, button:active, button:focus {
   background-color: #FFF;
   color: #201a40;
-}
-button:disabled {
-  opacity: 0.5;
-  cursor: default;
 }
 button:disabled:hover, button:disabled:active, button:disabled:focus {
   background-color: transparent;
