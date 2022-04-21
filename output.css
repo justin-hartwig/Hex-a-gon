@@ -112,7 +112,7 @@ button {
   font-weight: 700;
   cursor: pointer;
 }
-button:hover, button:active, button:focus {
+button:hover, button:active, button.active, button:focus {
   background-color: #FFF;
   color: #201a40;
 }

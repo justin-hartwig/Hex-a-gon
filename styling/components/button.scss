@@ -10,6 +10,7 @@ button {
 
     &:hover,
     &:active,
+    &.active,
     &:focus {
         background-color: $font-color;
         color: $bg-color;
