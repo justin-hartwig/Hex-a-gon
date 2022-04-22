@@ -20,6 +20,10 @@ function updateAnswerMessage (answerValidity : boolean) : void {
     }
 }
 
+function defaultAnswer() : void {
+    answerMessage.innerText = "Finde die richtige Farbe für den Hex-Wert."
+}
+
 function renderDifficultyOptions() : void {
     difficultyOptions.forEach( option => difficultyOptionContainer.appendChild(option.domElement));
 }
@@ -40,4 +44,4 @@ function enableColorChoice() : void {
     colorChoiceContainer.classList.remove("disabled");
 }
 
-export { updateQuestionNumber, updateAnswers, updateAnswerMessage, renderDifficultyOptions, disableColorChoice, enableColorChoice, disablePlayAgain, enablePlayAgain };
+export { updateQuestionNumber, updateAnswers, updateAnswerMessage, renderDifficultyOptions, disableColorChoice, enableColorChoice, disablePlayAgain, enablePlayAgain, defaultAnswer };

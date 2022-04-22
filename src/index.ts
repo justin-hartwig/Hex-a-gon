@@ -1,6 +1,6 @@
 import { correctAnswer, generateColorChoices, regenerateCorrectAnswer } from "./colorCoice";
 import { currentDifficulty, initalizeActiveDifficulty } from "./difficulty";
-import { disablePlayAgain, enableColorChoice, renderDifficultyOptions, updateAnswers, updateQuestionNumber } from "./domManipulation";
+import { defaultAnswer, disablePlayAgain, enableColorChoice, renderDifficultyOptions, updateAnswers, updateQuestionNumber } from "./domManipulation";
 import { initalizePlayAgain } from "./replay";
 
 
@@ -18,6 +18,7 @@ function play() : void {
     updateAnswers();
     enableColorChoice();
     disablePlayAgain();
+    defaultAnswer();
 }
 
 initalize();
