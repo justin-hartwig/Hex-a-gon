@@ -14,7 +14,7 @@ function createColorChoice(hexValue : string) : colorChoice {
     element.classList.add("color-choice");
     element.setAttribute("width", "121");
     element.setAttribute("height", "105");
-    element.setAttribute("viewBox", "0 0 121 105");
+    element.setAttribute("viewBox", "0 0 128 112");
     element.setAttribute("fill", "none");
     element.addEventListener("click", function(event : Event) {
         colorChoiceOnClick(event);

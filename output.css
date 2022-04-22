@@ -76,7 +76,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
@@ -92,6 +92,7 @@ body {
   stroke: #FFF;
   stroke-width: 4px;
   stroke-linejoin: round;
+  transform: translateX(4px);
 }
 
 #difficulty-container {
