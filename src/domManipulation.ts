@@ -13,11 +13,15 @@ function updateAnswers() : void{
 
 function updateAnswerMessage (answerValidity : boolean) : void {
     if (answerValidity) {
-        answerMessage.innerText = "Das ist die Richtige Antwort! Glückwunsch!"
+        answerMessage.innerText = "Das ist die richtige Antwort! Glückwunsch!"
     }
     else {
-        answerMessage.innerText = "Das ist die Falsche Antwort! Versuche es nochmal!"
+        answerMessage.innerText = "Das ist die falsche Antwort! Versuche es nochmal!"
     }
+}
+
+function defaultAnswer() : void {
+    answerMessage.innerText = "Finde die richtige Farbe für den Hex-Wert."
 }
 
 function renderDifficultyOptions() : void {
@@ -40,4 +44,4 @@ function enableColorChoice() : void {
     colorChoiceContainer.classList.remove("disabled");
 }
 
-export { updateQuestionNumber, updateAnswers, updateAnswerMessage, renderDifficultyOptions, disableColorChoice, enableColorChoice, disablePlayAgain, enablePlayAgain };
+export { updateQuestionNumber, updateAnswers, updateAnswerMessage, renderDifficultyOptions, disableColorChoice, enableColorChoice, disablePlayAgain, enablePlayAgain, defaultAnswer };

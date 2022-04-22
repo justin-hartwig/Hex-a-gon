@@ -71,11 +71,14 @@
     }
     function updateAnswerMessage(answerValidity) {
         if (answerValidity) {
-            answerMessage.innerText = "Das ist die Richtige Antwort! Glückwunsch!";
+            answerMessage.innerText = "Das ist die richtige Antwort! Glückwunsch!";
         }
         else {
-            answerMessage.innerText = "Das ist die Falsche Antwort! Versuche es nochmal!";
+            answerMessage.innerText = "Das ist die falsche Antwort! Versuche es nochmal!";
         }
+    }
+    function defaultAnswer() {
+        answerMessage.innerText = "Finde die richtige Farbe für den Hex-Wert.";
     }
     function renderDifficultyOptions() {
         difficultyOptions.forEach(option => difficultyOptionContainer.appendChild(option.domElement));
@@ -166,6 +169,7 @@
         updateAnswers();
         enableColorChoice();
         disablePlayAgain();
+        defaultAnswer();
     }
     initalize();
 
