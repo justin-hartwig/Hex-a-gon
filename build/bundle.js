@@ -24,7 +24,12 @@
     const playAgainButton = document.querySelector("#play-again");
     const difficultyOptionContainer = document.querySelector("#difficulty-container");
 
+    // Initialize active difficulty.
     let currentDifficulty = 5;
+    /**
+     * Initialize basic difficulty options.
+     * Additional options can be added dynamically.
+    */
     const difficultyOptions = [
         { name: "einfach",
             value: 3,
@@ -36,6 +41,14 @@
             value: 8,
             domElement: createDifficultyOptionDomElement("schwehr", 8) },
     ];
+    /**
+     * Creates a new difficulty option.
+     * Builds a button with the given name and sets a class. EventListener is also added.
+     *
+     * @param {string} name Name of the difficulty option.
+     * @param {number} difficultyNumber Difficulty value which determines the number of color choices.
+     * @returns {HTMLButtonElement} Button for the difficulty option, which can be rendered in the DOM.
+    */
     function createDifficultyOptionDomElement(name, difficultyNumber) {
         const element = document.createElement('button');
         element.classList.add("difficulty-button");
@@ -43,10 +56,17 @@
         element.addEventListener("click", () => changeDifficulty(difficultyNumber));
         return element;
     }
+    /**
+     * Creates a new difficulty option.
+     * Builds a button with the given name and sets a class. EventListener is also added.
+     *
+     * @param {string} name Name of the difficulty option.
+     * @param {number} difficultyNumber Difficulty value which determines the number of color choices.
+     * @returns {HTMLButtonElement} Button for the difficulty option, which can be rendered in the DOM.
+    */
     function changeDifficulty(difficulty) {
         currentDifficulty = difficulty;
-        difficultyOptions.forEach(option => option.domElement.classList.remove("active"));
-        getDifficultyOptionByNumber(difficulty).domElement.classList.add("active");
+        changeActiveDifficultyOption(difficulty);
         play();
     }
     function getDifficultyOptionByNumber(value) {
@@ -57,9 +77,6 @@
             }
         }
         return option;
-    }
-    function initalizeActiveDifficulty() {
-        getDifficultyOptionByNumber(currentDifficulty).domElement.classList.add("active");
     }
 
     function updateQuestionNumber(hexValue) {
@@ -95,6 +112,13 @@
     function enableColorChoice() {
         colorChoiceContainer.classList.remove("disabled");
     }
+    function changeActiveDifficultyOption(difficulty) {
+        difficultyOptions.forEach(option => option.domElement.classList.remove("active"));
+        getDifficultyOptionByNumber(difficulty).domElement.classList.add("active");
+    }
+    function initalizeActiveDifficulty() {
+        getDifficultyOptionByNumber(currentDifficulty).domElement.classList.add("active");
+    }
 
     function validateAnswer(target) {
         const choice = getColorChoiceBySVGElement(target);
@@ -109,8 +133,18 @@
         }
     }
 
+    // Initalize correct answer with random value.
     let correctAnswer = randomHexValue();
+    // Array containing the color choices.
     let answers = [];
+    /**
+     * Creates a new color choice.
+     * Builds a SVGElement with fixed attributes and a given color value. EventListener is also added.
+     * Element and value are added to the Datastructure.
+     *
+     * @param {string} hexValue Color value in Hex Code.
+     * @returns {colorChoice} Color choice with given color value and generated SVGElement.
+    */
     function createColorChoice(hexValue) {
         const element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         element.classList.add("color-choice");
@@ -125,6 +159,12 @@
         const choice = { value: hexValue, domElement: element };
         return choice;
     }
+    /**
+     * Creates multiple color choices depending on the given quantity.
+     * The choices are added to an array and shuffled.
+     *
+     *  @param {number} quantity Quantity of color choices to be generated.
+    */
     function generateColorChoices(quantity) {
         answers = [];
         answers.push(createColorChoice(correctAnswer));
@@ -133,9 +173,20 @@
         }
         answers = shuffleArray(answers);
     }
+    /**
+     * Removes a given choice from the answer array.
+     *
+     * @param {colorChoice} choice Color which is removed.
+    */
     function removeChoice(choice) {
         answers = answers.filter(answer => { return answer.value !== choice.value; });
     }
+    /**
+     * Searches the answer array for a matching SVGElement, and returns the corresponding color choice.
+     *
+     * @param {SVGElement} element SVGElement which is searched.
+     * @returns {colorChoice} Corresponding color choice to the given SVGElement.
+    */
     function getColorChoiceBySVGElement(element) {
         let choice = {};
         for (let i = 0; i < answers.length; i++) {
@@ -145,9 +196,16 @@
         }
         return choice;
     }
+    /**
+     * Generates a new color value and saves it as the correct answer.
+    */
     function regenerateCorrectAnswer() {
         correctAnswer = randomHexValue();
     }
+    /**
+     * On click function for the EventListener of the color choice.
+     * Triggers validation of the clicked choice.
+    */
     function colorChoiceOnClick(event) {
         validateAnswer(event.target);
     }

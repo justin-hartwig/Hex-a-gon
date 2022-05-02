@@ -1,7 +1,12 @@
 import { answerMessage, colorChoiceContainer, difficultyOptionContainer, playAgainButton, questionNumber } from "./domElements";
 import { answers } from "./colorCoice";
-import { difficultyOptions } from "./difficulty";
+import { currentDifficulty, difficultyOptions, getDifficultyOptionByNumber } from "./difficulty";
 
+/** 
+ * Removes a given choice from the answer array.
+ * 
+ * @param {colorChoice} choice Color which is removed.
+*/
 function updateQuestionNumber(hexValue : string) : void{
     questionNumber.innerHTML = hexValue;
 }
@@ -44,4 +49,13 @@ function enableColorChoice() : void {
     colorChoiceContainer.classList.remove("disabled");
 }
 
-export { updateQuestionNumber, updateAnswers, updateAnswerMessage, renderDifficultyOptions, disableColorChoice, enableColorChoice, disablePlayAgain, enablePlayAgain, defaultAnswer };
+function changeActiveDifficultyOption(difficulty : number) : void {
+    difficultyOptions.forEach(option => option.domElement.classList.remove("active"));
+    getDifficultyOptionByNumber(difficulty).domElement.classList.add("active");
+}
+
+function initalizeActiveDifficulty() : void {
+    getDifficultyOptionByNumber(currentDifficulty).domElement.classList.add("active");
+}
+
+export { updateQuestionNumber, updateAnswers, updateAnswerMessage, renderDifficultyOptions, disableColorChoice, enableColorChoice, disablePlayAgain, enablePlayAgain, defaultAnswer, changeActiveDifficultyOption, initalizeActiveDifficulty };

@@ -1,14 +1,27 @@
 import { randomHexValue, shuffleArray } from "./randomize";
 import { validateAnswer } from "./validation";
 
+/** 
+ * Data structure for the generated color choices.
+*/ 
 interface colorChoice {
     value : string;
     domElement : SVGElement;
 }
 
+// Initalize correct answer with random value.
 let correctAnswer : string = randomHexValue();
+// Array containing the color choices.
 let answers :  colorChoice[] = [];
 
+/** 
+ * Creates a new color choice. 
+ * Builds a SVGElement with fixed attributes and a given color value. EventListener is also added.
+ * Element and value are added to the Datastructure. 
+ * 
+ * @param {string} hexValue Color value in Hex Code.
+ * @returns {colorChoice} Color choice with given color value and generated SVGElement.
+*/
 function createColorChoice(hexValue : string) : colorChoice {
     const element : SVGElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     element.classList.add("color-choice");
@@ -25,6 +38,12 @@ function createColorChoice(hexValue : string) : colorChoice {
     return choice;
 }
 
+/** 
+ * Creates multiple color choices depending on the given quantity.
+ * The choices are added to an array and shuffled.
+ * 
+ *  @param {number} quantity Quantity of color choices to be generated.
+*/
 function generateColorChoices(quantity : number) : void {
     answers = [];
     answers.push(createColorChoice(correctAnswer));
@@ -34,10 +53,21 @@ function generateColorChoices(quantity : number) : void {
     answers = shuffleArray(answers);
 }
 
+/** 
+ * Removes a given choice from the answer array.
+ * 
+ * @param {colorChoice} choice Color which is removed.
+*/
 function removeChoice(choice : colorChoice) : void {
     answers = answers.filter(answer => {return answer.value !== choice.value});
 }
 
+/** 
+ * Searches the answer array for a matching SVGElement, and returns the corresponding color choice.
+ * 
+ * @param {SVGElement} element SVGElement which is searched.
+ * @returns {colorChoice} Corresponding color choice to the given SVGElement.
+*/
 function getColorChoiceBySVGElement (element : SVGElement) : colorChoice {
     let choice : colorChoice = {} as colorChoice;
     for (let i : number = 0; i < answers.length; i++) {
@@ -48,10 +78,17 @@ function getColorChoiceBySVGElement (element : SVGElement) : colorChoice {
     return choice;
 }
 
+/** 
+ * Generates a new color value and saves it as the correct answer.
+*/
 function regenerateCorrectAnswer() : void {
     correctAnswer = randomHexValue();
 }
 
+/** 
+ * On click function for the EventListener of the color choice. 
+ * Triggers validation of the clicked choice.
+*/
 function colorChoiceOnClick(event : Event) : void {
     validateAnswer(event.target as SVGElement)
 }
