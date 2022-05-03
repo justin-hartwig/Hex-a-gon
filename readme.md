@@ -1,12 +1,10 @@
-## How to get started
+# Hex-a-gone
 
-Type npm i to install dependencies inside of the project folder in the terminal.
+A simple color picking game with Hex Codes.
 
-Write any source files in typescript inside the source folder, the main file being index.ts as entry file for rollup.
+Run npm install to install all needed packages. And npm run build to build the app.
 
-Type tsc to javascript
-
-Link your compiled bundle.js into your HTML-Files.
+The [live version](https://justin-hartwig.github.io/Hex-a-gon/) of the app is available on github pages.
 
 
 

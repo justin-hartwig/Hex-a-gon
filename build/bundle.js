@@ -1,7 +1,12 @@
 (function (exports) {
     'use strict';
 
-    //https://stackoverflow.com/questions/58325771/how-to-generate-random-hex-string-in-javascript IceMetalPunk
+    /**
+     * Returns a random hex color value by generating random hex values in a loop and adding them to a string.
+     * https://stackoverflow.com/questions/58325771/how-to-generate-random-hex-string-in-javascript IceMetalPunk
+     *
+     * @returns {string} Random hex color value.
+    */
     function randomHexValue() {
         let randomHexString = '#';
         for (let i = 0; i < 6; ++i) {
@@ -9,7 +14,12 @@
         }
         return randomHexString;
     }
-    //Schuffle Algorithm by Fisher–Yates
+    /**
+     * Shuffels a given array with the algorithm by Fisher–Yates.
+     *
+     * @property {any[]} array The Array to be shuffled.
+     * @returns {any[]} The shuffled array.
+    */
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -18,6 +28,7 @@
         return array;
     }
 
+    // Accessing the DOM and save specific elements which have to be manipulated.
     const questionNumber = document.querySelector("#random-hex-value");
     const colorChoiceContainer = document.querySelector("#color-choice-container");
     const answerMessage = document.querySelector("#answer-message");
@@ -57,18 +68,22 @@
         return element;
     }
     /**
-     * Creates a new difficulty option.
-     * Builds a button with the given name and sets a class. EventListener is also added.
+     * Changes current active difficulty for a given number.
+     * Restarts the game.
      *
-     * @param {string} name Name of the difficulty option.
-     * @param {number} difficultyNumber Difficulty value which determines the number of color choices.
-     * @returns {HTMLButtonElement} Button for the difficulty option, which can be rendered in the DOM.
+     * @param {number} difficulty Difficulty value which will be set as active.
     */
     function changeDifficulty(difficulty) {
         currentDifficulty = difficulty;
         changeActiveDifficultyOption(difficulty);
         play();
     }
+    /**
+     * Searches the difficulty option array for a matching number value, and returns the corresponding option.
+     *
+     * @param {number} value Number value which is searched.
+     * @returns {difficultyOption} Corresponding difficulty option to the given number.
+    */
     function getDifficultyOptionByNumber(value) {
         let option = {};
         for (let i = 0; i < difficultyOptions.length; i++) {
@@ -79,13 +94,26 @@
         return option;
     }
 
+    /**
+     * Changes the displayed color value to the given string.
+     *
+     * @param {string} hexValue Color value to be displayed.
+    */
     function updateQuestionNumber(hexValue) {
         questionNumber.innerHTML = hexValue;
     }
+    /**
+     * Updates the answers by removing them from the DOM and rendering them again.
+    */
     function updateAnswers() {
         colorChoiceContainer.innerHTML = "";
         answers.forEach(answer => colorChoiceContainer.appendChild(answer.domElement));
     }
+    /**
+     * Displays a message after the validation depending on the result.
+     *
+     * @param {boolean} answerValidity Result of the validation.
+    */
     function updateAnswerMessage(answerValidity) {
         if (answerValidity) {
             answerMessage.innerText = "Das ist die richtige Antwort! Glückwunsch!";
@@ -94,32 +122,68 @@
             answerMessage.innerText = "Das ist die falsche Antwort! Versuche es nochmal!";
         }
     }
+    /**
+     * Renders the default question after replay.
+    */
     function defaultAnswer() {
         answerMessage.innerText = "Finde die richtige Farbe für den Hex-Wert.";
     }
+    /**
+     * Renders all difficult options.
+    */
     function renderDifficultyOptions() {
         difficultyOptions.forEach(option => difficultyOptionContainer.appendChild(option.domElement));
     }
+    /**
+     * Disables the play again button.
+    */
     function disablePlayAgain() {
         playAgainButton.disabled = true;
     }
+    /**
+     * Enables the play again button.
+    */
     function enablePlayAgain() {
         playAgainButton.disabled = false;
     }
+    /**
+     * Disables clicking on the color choices.
+    */
     function disableColorChoice() {
         colorChoiceContainer.classList.add("disabled");
     }
+    /**
+     * Enables clicking on the color choices.
+    */
     function enableColorChoice() {
         colorChoiceContainer.classList.remove("disabled");
     }
+    /**
+     * Changes the active difficulty option by removing the class on all options and adding them to the given one.
+     *
+     * @param {number} difficulty Difficulty value of the active option.
+    */
     function changeActiveDifficultyOption(difficulty) {
         difficultyOptions.forEach(option => option.domElement.classList.remove("active"));
         getDifficultyOptionByNumber(difficulty).domElement.classList.add("active");
     }
+    /**
+     * Adds active difficulty on the default option during start.
+    */
     function initalizeActiveDifficulty() {
         getDifficultyOptionByNumber(currentDifficulty).domElement.classList.add("active");
     }
 
+    /**
+     * Validates an answer by the clicked SVGElement.
+     * The clicked element is used to determine the color choice it belongs to.
+     * This choice is compared to the correct answer.
+     * If they don't match, the choice is removed.
+     * If they match, the play again button is enabled and all choices are disabled.
+     * The Answer message is updated depending on the result.
+     *
+     * @property {SVGElement} target The clicked SVGElement which color choice should be validated.
+    */
     function validateAnswer(target) {
         const choice = getColorChoiceBySVGElement(target);
         updateAnswerMessage(choice.value === correctAnswer);
@@ -210,16 +274,26 @@
         validateAnswer(event.target);
     }
 
+    /**
+     * Adds an EventListener on the play again button on app start.
+    */
     function initalizePlayAgain() {
         playAgainButton.addEventListener("click", () => play());
     }
 
+    /**
+     * Initalize the game by using helper functions in other modules.
+    */
     function initalize() {
         initalizePlayAgain();
         renderDifficultyOptions();
         initalizeActiveDifficulty();
         play();
     }
+    /**
+     * Starts/Restarts the game by using helper functions in other modules.
+     * Gets called on replay and difficulty change.
+    */
     function play() {
         regenerateCorrectAnswer();
         updateQuestionNumber(correctAnswer);
@@ -229,6 +303,7 @@
         disablePlayAgain();
         defaultAnswer();
     }
+    // Initilization on app start.
     initalize();
 
     exports.play = play;
